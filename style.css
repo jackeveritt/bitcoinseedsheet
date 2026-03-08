@@ -576,6 +576,15 @@ body {
     break-after: page;
   }
 
+  /* Force browsers to print background colours (e.g. alternating row tints) */
+  .row-even,
+  .row-odd,
+  .seed-table th,
+  .instr-warning-box {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
   .print-page:last-child {
     page-break-after: avoid;
     break-after: avoid;
