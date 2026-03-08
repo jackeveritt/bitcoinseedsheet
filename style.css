@@ -1,0 +1,585 @@
+/* ============================================================
+   BRAND PALETTE
+   Bitcoin Orange  #F7931A  — Primary accent. CTAs, icons, highlights.
+   Obsidian        #1A1A1A  — Headings, body text, authority elements.
+   Deep Navy       #1D3557  — Secondary accent, trust signals, canvas.
+   Slate           #4A4A4A  — Body copy, secondary text, descriptions.
+   Cloud           #F5F5F5  — Page backgrounds, card fills, quiet surfaces.
+   White           #FFFFFF  — Primary page background.
+   ============================================================ */
+
+/* ============================================================
+   BASE RESET
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #1D3557;
+  color: #1A1A1A;
+}
+
+/* ============================================================
+   LANDING PAGE
+   Deep Navy canvas with a centred white card.
+   ============================================================ */
+#landing {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.landing-card {
+  max-width: 680px;
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 2.5rem 2.5rem 2rem;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4);
+}
+
+.landing-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #F7931A;
+  padding-bottom: 1.25rem;
+}
+
+.landing-header .bitcoin-symbol {
+  font-size: 2.5rem;
+  color: #F7931A;
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.landing-header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-bottom: 0.3rem;
+}
+
+.landing-header .tagline {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1D3557;
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.01em;
+}
+
+.landing-header p {
+  font-size: 0.9rem;
+  color: #4A4A4A;
+}
+
+.section-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #F7931A;
+  margin-bottom: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+.explainer p {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #4A4A4A;
+}
+
+/* Step-by-step how-to list */
+.steps {
+  list-style: none;
+  margin-top: 0.25rem;
+}
+
+.steps li {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+  color: #4A4A4A;
+  line-height: 1.6;
+  margin-bottom: 0.6rem;
+}
+
+.steps li .step-num {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  background: #F7931A;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.75rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+/* Security warnings box */
+.warnings {
+  background: #F5F5F5;
+  border: 1px solid #F7931A;
+  border-radius: 6px;
+  padding: 0.9rem 1rem;
+  margin-top: 0.25rem;
+}
+
+.warnings ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.warnings ul li {
+  font-size: 0.85rem;
+  color: #1D3557;
+  line-height: 1.45;
+  padding-left: 1.3em;
+  position: relative;
+}
+
+.warnings ul li::before {
+  content: "⚠";
+  position: absolute;
+  left: 0;
+  font-size: 0.75rem;
+  color: #F7931A;
+}
+
+/* Generate button */
+.generate-section {
+  margin-top: 1.5rem;
+}
+
+#btn-generate {
+  width: 100%;
+  padding: 0.9rem 2rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #F7931A;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: background 0.15s;
+}
+
+#btn-generate:hover {
+  background: #d4780a;
+}
+
+.generate-note {
+  margin-top: 0.6rem;
+  text-align: center;
+  font-size: 0.78rem;
+  color: #4A4A4A;
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* ============================================================
+   TIP SECTION
+   ============================================================ */
+.tip-section {
+  margin-top: 1.5rem;
+  border-top: 1px solid #F5F5F5;
+  padding-top: 1.25rem;
+  text-align: center;
+}
+
+.tip-text {
+  font-size: 0.85rem;
+  color: #4A4A4A;
+  margin-top: 0.25rem;
+}
+
+.tip-qr-wrap {
+  display: inline-block;
+  margin: 0.75rem auto 0.4rem;
+  border: 3px solid #F7931A;
+  border-radius: 6px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.tip-address {
+  font-size: 0.8rem;
+  font-family: "Courier New", Courier, monospace;
+  color: #4A4A4A;
+  margin-top: 0.3rem;
+}
+
+.github-link {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.github-link a {
+  color: #1D3557;
+  text-decoration: none;
+}
+
+.github-link a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   APP VIEW (shown after generation)
+   Deep Navy canvas with A4 pages floating on it.
+   ============================================================ */
+#app {
+  display: none;
+  background: #1D3557;
+  min-height: 100vh;
+}
+
+/* Sticky top controls bar — hidden when printing */
+#screen-controls {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #1A1A1A;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.65rem 1.5rem;
+  gap: 1rem;
+  border-bottom: 2px solid #F7931A;
+}
+
+#screen-controls .brand {
+  font-weight: 700;
+  color: #F7931A;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+#screen-controls .controls-right {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.ctrl-btn {
+  padding: 0.45rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+#btn-print {
+  background: #F7931A;
+  color: #FFFFFF;
+}
+#btn-print:hover { background: #d4780a; }
+
+#btn-regenerate {
+  background: #1A1A1A;
+  color: #F5F5F5;
+  border: 1px solid #4A4A4A;
+}
+#btn-regenerate:hover { background: #4A4A4A; color: #FFFFFF; }
+
+/* Pages scrolling area */
+#pages-area {
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* ============================================================
+   PRINT PAGES
+   On screen: white A4 "paper" floating on the Deep Navy canvas.
+   On print:  each .print-page is one page, decorations stripped.
+   ============================================================ */
+.print-page {
+  width: 210mm;
+  background: #FFFFFF;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+}
+
+.page-inner {
+  padding: 8mm 10mm;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Page header (logo line + title) */
+.page-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  border-bottom: 1.5px solid #F7931A;
+  padding-bottom: 2mm;
+  margin-bottom: 3mm;
+}
+
+.page-header .page-logo {
+  font-size: 10pt;
+  font-weight: 700;
+  color: #F7931A;
+}
+
+.page-header .page-title {
+  font-size: 8pt;
+  font-weight: 700;
+  color: #1A1A1A;
+  flex: 1;
+}
+
+.page-header .page-subtitle {
+  font-size: 6.5pt;
+  color: #4A4A4A;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   INSTRUCTIONS PAGE (Page 1)
+   ============================================================ */
+.instr-body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8pt;
+  color: #1A1A1A;
+  line-height: 1.6;
+}
+
+.instr-section {
+  margin-bottom: 5mm;
+}
+
+.instr-heading {
+  font-size: 7.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #F7931A;
+  border-bottom: 1px solid #F7931A;
+  padding-bottom: 1mm;
+  margin-bottom: 2mm;
+}
+
+.instr-section p {
+  font-size: 7.5pt;
+  line-height: 1.6;
+}
+
+.instr-steps {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.instr-steps td {
+  font-size: 7.5pt;
+  vertical-align: top;
+  padding: 1.5mm 0;
+  border-bottom: 1px dotted #F5F5F5;
+  line-height: 1.45;
+}
+
+.instr-num {
+  width: 6mm;
+  font-weight: 700;
+  color: #F7931A;
+  padding-right: 2mm !important;
+  white-space: nowrap;
+}
+
+.instr-pages {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.instr-pages td {
+  font-size: 7.5pt;
+  padding: 1mm 0;
+  border-bottom: 1px dotted #F5F5F5;
+  vertical-align: top;
+  line-height: 1.4;
+}
+
+.instr-pg {
+  width: 18mm;
+  font-weight: 700;
+  color: #4A4A4A;
+  white-space: nowrap;
+}
+
+.instr-warning-box {
+  background: #F5F5F5;
+  border: 1px solid #F7931A;
+  border-radius: 3px;
+  padding: 2mm 3mm;
+}
+
+.instr-warns {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.instr-warns td {
+  font-size: 7.5pt;
+  padding: 1mm 0;
+  vertical-align: top;
+  line-height: 1.4;
+}
+
+.instr-warn-icon {
+  width: 5mm;
+  color: #F7931A;
+  font-size: 8pt;
+}
+
+/* ============================================================
+   RECORD SHEET (Page 2)
+   8-column card grid — one card per seed word slot.
+   ============================================================ */
+.record-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 2mm;
+  margin-top: 3mm;
+}
+
+.record-card {
+  border: 1px solid #F5F5F5;
+  border-radius: 1.5mm;
+  padding: 1.5mm 2mm 2mm;
+  height: 19mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.record-num {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 7pt;
+  font-weight: 700;
+  color: #F7931A;
+  line-height: 1;
+}
+
+.record-line {
+  border-bottom: 1px solid #4A4A4A;
+  width: 100%;
+  padding-bottom: 0.5mm;
+}
+
+/* ============================================================
+   SEED SHEET TABLE (Page 3)
+   79 rows × 26 columns — first 4 chars of each word.
+   ============================================================ */
+.seed-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.seed-table th,
+.seed-table td {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 6.5pt;
+  text-align: center;
+  padding: 0;
+  width: 24px;
+}
+
+.seed-table th {
+  font-weight: 700;
+  height: 14px;
+  border-bottom: 1.5px solid #4A4A4A;
+  background: #F5F5F5;
+}
+
+.seed-table td {
+  height: 11px;
+}
+
+.seed-table .row-label {
+  font-weight: 700;
+  text-align: right;
+  padding-right: 3px;
+  color: #4A4A4A;
+  width: 18px;
+  font-size: 6pt;
+}
+
+/* ============================================================
+   LOOKUP TABLE (Pages 4 and 5)
+   Alphabetically sorted: word abbreviation → grid coordinate.
+   ============================================================ */
+.lookup-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.lookup-table td {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 6.5pt;
+  text-align: left;
+  padding: 0 3px;
+  height: 11px;
+  /* width is set per-column by JS so cells divide the page evenly */
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   ALTERNATING ROW COLOURS (shared by all tables)
+   ============================================================ */
+.row-even { background: #F5F5F5; }
+.row-odd  { background: #FFFFFF; }
+
+/* ============================================================
+   PRINT MEDIA STYLES
+   On print: hide UI chrome, show only pages, one page per sheet.
+   ============================================================ */
+@media print {
+  body { background: white; }
+
+  #landing,
+  #screen-controls { display: none !important; }
+
+  #app { display: block !important; }
+
+  #pages-area {
+    padding: 0;
+    gap: 0;
+    display: block;
+  }
+
+  .print-page {
+    width: 100%;
+    box-shadow: none;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .print-page:last-child {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+}
+
+@page {
+  size: A4 portrait;
+  margin: 0;
+}

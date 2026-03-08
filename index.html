@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'">
+  <title>Bitcoin Seed Sheet Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       SECTION A: LANDING PAGE
+       Shown when the file is first opened. Explains the tool,
+       shows how to use it, and presents the Generate button.
+       Hidden once the user clicks Generate.
+       ============================================================ -->
+  <section id="landing">
+    <div class="landing-card">
+
+      <header class="landing-header">
+        <span class="bitcoin-symbol">&#x20BF;</span>
+        <h1>Bitcoin Seed Sheet Generator</h1>
+        <p class="tagline">Two pieces. Two locations. One complete seed.</p>
+        <p>An offline, printable backup system for BIP39 seed phrases.</p>
+      </header>
+
+      <div class="explainer">
+        <div class="section-title">What is this?</div>
+        <p>
+          Your Bitcoin wallet is controlled by a seed phrase — a list of 12 to 24 words from a
+          fixed 2,048-word standard (BIP39). This tool generates a unique, randomly shuffled grid
+          containing all 2,048 words. Instead of writing your seed words directly, you record only
+          their <strong>grid coordinates</strong> (e.g. A1, D23, Q7&hellip;). The coordinates are
+          meaningless without the specific grid used, so storing them separately keeps your Bitcoin safe.
+        </p>
+      </div>
+
+      <div class="how-to-use">
+        <div class="section-title">How to use</div>
+        <ol class="steps">
+          <li>
+            <span class="step-num">1</span>
+            <span><strong>Generate</strong> &mdash; Click the button below. A unique grid is created
+            locally in your browser using cryptographic randomness. Nothing leaves your device.</span>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <span><strong>Print</strong> &mdash; Print all 5 pages using your browser&rsquo;s
+            print function (Ctrl+P / Cmd+P). You will get: instructions, a seed coordinates,
+            the word grid, and two lookup pages.</span>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <span><strong>Encode</strong> &mdash; Use the <em>Lookup Table</em> (pages 3&ndash;4)
+            to find the grid coordinate for each word in your seed phrase. Write the coordinates
+            on the blank template (page 1).</span>
+          </li>
+          <li>
+            <span class="step-num">4</span>
+            <span><strong>Store separately</strong> &mdash; Keep your list of coordinates
+            in a completely different location from the printed grid sheets. Either alone is useless;
+            together they reconstruct your seed.</span>
+          </li>
+          <li>
+            <span class="step-num">5</span>
+            <span><strong>Recover</strong> &mdash; To recover your seed, use the <em>Seed Sheet</em>
+            (page 2). Find each coordinate column letter across the top and the row number
+            down the side to read back the full word.</span>
+          </li>
+        </ol>
+      </div>
+
+      <div class="security-section">
+        <div class="section-title">Security</div>
+        <div class="warnings">
+          <ul>
+            <li>Disconnect from the internet before generating and printing.</li>
+            <li>Use a browser with no extensions, or use private/incognito mode &mdash; extensions can read the page.</li>
+            <li>Never store your coordinates and grid sheets in the same place.</li>
+            <li>Print to paper only &mdash; do not save as PDF or screenshot. Both can sync to cloud storage.</li>
+            <li>Clear your print queue after printing &mdash; the OS spool file contains the full grid.</li>
+            <li>Read the code &mdash; this tool has no external dependencies and all source
+                is visible in your browser. View source (Ctrl+U / Cmd+U) to verify it yourself.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="generate-section">
+        <button id="btn-generate">Generate Seed Sheet</button>
+        <p class="generate-note">Uses crypto.getRandomValues() &mdash; each sheet is unique</p>
+      </div>
+
+      <div class="tip-section">
+        <div class="section-title">Support this project</div>
+        <p class="tip-text">Found this useful? Send a Lightning tip.</p>
+        <div class="tip-qr-wrap">
+          <img src="jack.png" alt="Lightning tip QR — jack@zbg.gg" width="160" height="160">
+        </div>
+        <div class="tip-address">&#x26A1; jack@zbg.gg</div>
+      </div>
+
+      <div class="github-link">
+        <a href="https://github.com/jackeveritt/bitcoinseedsheet" target="_blank" rel="noopener">View source on GitHub</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION B: APP VIEW
+       Shown after the user clicks Generate.
+       Contains the sticky control bar and all 6 print pages.
+       ============================================================ -->
+  <section id="app">
+
+    <!-- Sticky controls bar (hidden when printing) -->
+    <div id="screen-controls">
+      <span class="brand">&#x20BF; Bitcoin Seed Sheet Generator</span>
+      <div class="controls-right">
+        <button class="ctrl-btn" id="btn-print">Print All Pages</button>
+        <button class="ctrl-btn" id="btn-regenerate">New Sheet</button>
+      </div>
+    </div>
+
+    <div id="pages-area">
+
+      <!-- PAGE 1: Instructions -->
+      <div class="print-page" id="page-instructions">
+        <div class="page-inner">
+          <div class="page-header">
+            <span class="page-logo">&#x20BF;</span>
+            <span class="page-title">Bitcoin Seed Sheet &mdash; Instructions</span>
+            <span class="page-subtitle">bitcoinseedsheet.com</span>
+          </div>
+          <div class="instr-body">
+
+            <div class="instr-section">
+              <div class="instr-heading">What is this?</div>
+              <p>Your Bitcoin wallet is controlled by a seed phrase &mdash; 12 to 24 words from the
+              2,048-word BIP39 standard. This system generates a unique, randomly shuffled grid
+              containing all 2,048 words. Instead of writing your seed words directly, you record only
+              their <strong>grid coordinates</strong> (e.g. A1, D23, Q7). The coordinates are
+              meaningless without the specific grid, so storing them separately keeps your Bitcoin safe.</p>
+              <p>The grid displays only the first 4 letters of each word. The BIP39 standard guarantees
+              no two words share the same 4-letter prefix, so each abbreviation uniquely identifies
+              its full word &mdash; no ambiguity is possible.</p>
+            </div>
+
+            <div class="instr-section">
+              <div class="instr-heading">How to use</div>
+              <table class="instr-steps">
+                <tbody>
+                  <tr>
+                    <td class="instr-num">1</td>
+                    <td><strong>Encode</strong> &mdash; Use the <em>Lookup Table</em> (pages 3&ndash;4) to find
+                    the grid coordinate for each word in your seed phrase. Write each coordinate next to
+                    the matching word number on the <em>Seed Coordinates</em> (page 2).</td>
+                  </tr>
+                  <tr>
+                    <td class="instr-num">2</td>
+                    <td><strong>Store separately</strong> &mdash; Keep the <em>Seed Coordinates</em> in a completely
+                    different location from the <em>Word Grid</em> (page 2 of the grid set).
+                    Either document alone reveals nothing; together they reconstruct your seed.</td>
+                  </tr>
+                  <tr>
+                    <td class="instr-num">3</td>
+                    <td><strong>Recover</strong> &mdash; To recover your seed, bring the <em>Seed Coordinates</em>
+                    to the <em>Word Grid</em>. For each coordinate, find the column letter across the top
+                    and the row number down the side to read back the full word.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="instr-section">
+              <div class="instr-heading">Your printed pages</div>
+              <table class="instr-pages">
+                <tbody>
+                  <tr><td class="instr-pg">Page 1</td><td>These instructions</td></tr>
+                  <tr><td class="instr-pg">Page 2</td><td>Seed Coordinates &mdash; write your seed coordinates here. <strong>Store separately.</strong></td></tr>
+                  <tr><td class="instr-pg">Page 3</td><td>Word Grid &mdash; your unique shuffled grid of all 2,048 BIP39 words</td></tr>
+                  <tr><td class="instr-pg">Pages 4&ndash;5</td><td>Lookup Tables &mdash; find any word and get its grid coordinate</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="instr-section instr-warning-box">
+              <div class="instr-heading">Security reminders</div>
+              <table class="instr-warns">
+                <tbody>
+                  <tr><td class="instr-warn-icon">&#9888;</td><td>Generate and print offline &mdash; disconnect from the internet first.</td></tr>
+                  <tr><td class="instr-warn-icon">&#9888;</td><td>Use a browser with no extensions, or private/incognito mode &mdash; extensions can read the page.</td></tr>
+                  <tr><td class="instr-warn-icon">&#9888;</td><td>Never store your Seed Coordinates and Word Grid in the same place.</td></tr>
+                  <tr><td class="instr-warn-icon">&#9888;</td><td>Print to paper only &mdash; do not save as PDF or screenshot. Both can sync to cloud storage.</td></tr>
+                  <tr><td class="instr-warn-icon">&#9888;</td><td>Clear your print queue after printing &mdash; the OS spool file contains the full grid.</td></tr>
+                  <tr><td class="instr-warn-icon">&#9888;</td><td>This tool has no external dependencies. View source to verify.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- PAGE 2: Blank Seed Coordinates Template -->
+      <div class="print-page" id="page-blank">
+        <div class="page-inner">
+          <div class="page-header">
+            <span class="page-logo">&#x20BF;</span>
+            <span class="page-title">Seed Coordinates</span>
+            <span class="page-subtitle">&#x26A0; Store this page SEPARATELY from your Word Grid</span>
+          </div>
+          <div class="record-grid">
+            <div class="record-card"><span class="record-num">1</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">2</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">3</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">4</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">5</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">6</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">7</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">8</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">9</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">10</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">11</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">12</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">13</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">14</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">15</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">16</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">17</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">18</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">19</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">20</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">21</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">22</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">23</span><div class="record-line"></div></div>
+            <div class="record-card"><span class="record-num">24</span><div class="record-line"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAGE 2: Main Seed Sheet (the randomised word grid) -->
+      <div class="print-page" id="page-seed-sheet">
+        <div class="page-inner">
+          <div class="page-header">
+            <span class="page-logo">&#x20BF;</span>
+            <span class="page-title">Word Grid</span>
+            <span class="page-subtitle">79 rows &times; 26 columns &mdash; all 2,048 BIP39 words</span>
+          </div>
+          <div id="seed-sheet-container"></div>
+        </div>
+      </div>
+
+      <!-- PAGE 3: Lookup Table (words A through first half) -->
+      <div class="print-page" id="page-lookup-1">
+        <div class="page-inner">
+          <div class="page-header">
+            <span class="page-logo">&#x20BF;</span>
+            <span class="page-title">Lookup Table (1 of 2) &mdash; Word &rarr; Coordinate</span>
+            <span class="page-subtitle">Find your seed word here to get its grid coordinate</span>
+          </div>
+          <div id="lookup-1-container"></div>
+        </div>
+      </div>
+
+      <!-- PAGE 4: Lookup Table (words second half through Z) -->
+      <div class="print-page" id="page-lookup-2">
+        <div class="page-inner">
+          <div class="page-header">
+            <span class="page-logo">&#x20BF;</span>
+            <span class="page-title">Lookup Table (2 of 2) &mdash; Word &rarr; Coordinate</span>
+            <span class="page-subtitle">Find your seed word here to get its grid coordinate</span>
+          </div>
+          <div id="lookup-2-container"></div>
+        </div>
+      </div>
+
+
+    </div><!-- #pages-area -->
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
