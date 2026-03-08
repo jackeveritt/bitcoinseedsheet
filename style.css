@@ -598,8 +598,13 @@ body {
 
 /* When the viewport is narrower than an A4 page:
    - left-align pages so the user can scroll right
-   - wrap the header to two rows: brand on top, buttons below */
+   - wrap the header to two rows: brand on top, buttons below
+   - reduce landing card padding */
 @media (max-width: 900px) {
+  .landing-card {
+    padding: 12px;
+  }
+
   #screen-controls {
     flex-wrap: wrap;
     padding: 0.5rem 0.75rem;
